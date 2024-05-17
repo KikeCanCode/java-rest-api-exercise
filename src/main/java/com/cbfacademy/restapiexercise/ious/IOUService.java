@@ -1,16 +1,33 @@
 package com.cbfacademy.restapiexercise.ious;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.UUID;
 
-public interface IOUService {
+import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.stereotype.Service;
+
+
+@Service
+public class IOUService {
+
+public IOURepository iouRepository; 
+
+public IOUService(IOURepository iouRepository) {
+
+    this.iouRepository = iouRepository;
+}
 
     /**
      * Retrieve a list of all IOUs.
      *
      * @return A list of all IOUs.
      */
-    List<IOU> getAllIOUs();
+
+    public List<IOU> getAllIOUs() {
+        return iouRepository.findAll();
+    }
 
     /**
      * Retrieve an IOU by its ID.
@@ -18,7 +35,9 @@ public interface IOUService {
      * @param id The ID of the IOU to retrieve.
      * @return The IOU with the specified ID, or null if not found.
      */
-    IOU getIOU(UUID id);
+    public IOU getIOU(UUID id) throws NoSuchElementException {
+        return iouRepository.findById(id).orElseThrow();
+    }
 
     /**
      * Create a new IOU.
@@ -26,7 +45,10 @@ public interface IOUService {
      * @param iou The IOU object to create.
      * @return The created IOU.
      */
-    IOU createIOU(IOU iou);
+    public IOU createIOU(IOU iou) throws IllegalArgumentException, OptimisticLockingFailureException {
+        return iouRepository.save(iou);  
+    }
+        
 
     /**
      * Update an existing IOU by its ID.
@@ -35,13 +57,27 @@ public interface IOUService {
      * @param updatedIOU The updated IOU object.
      * @return The updated IOU, or null if the ID is not found.
      */
-    IOU updateIOU(UUID id, IOU updatedIOU);
+   public IOU updateIOU(UUID id, IOU updatedIOU) throws NoSuchElementException { // id remind the same but replace the value with the new ones
+   
+    IOU iou = iouRepository.findById(id).orElseThrow();
+        iou.setBorrower(updatedIOU.getBorrower()); // 
+        iou.setLender(updatedIOU.getLender()); // save in a new variable the name of the lender of the updated iou object
+        iou.setAmount(updatedIOU.getAmount());
+        iou.setDateTime(updatedIOU.getDateTime());
+        iouRepository.save(iou); // saved updated iou
+        return iou; // retunr the updated iou object
+    
+   }
 
     /**
      * Delete an IOU by its ID.
      *
      * @param id The ID of the IOU to delete.
      */
-    void deleteIOU(UUID id);
+    public void deleteIOU(UUID id) { // 
+
+        iouRepository.deleteById(id);
+        
+    }
 
 }
