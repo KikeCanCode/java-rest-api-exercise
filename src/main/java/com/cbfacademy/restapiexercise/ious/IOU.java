@@ -1,5 +1,9 @@
 package com.cbfacademy.restapiexercise.ious;
 
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,3 +21,11 @@ BigDecimal amount - amount covered by IOU
 Instant dateTime - date and time of IOU being issued
 public IOU(String borrower, String lender, BigDecimal amount, Instant datetime) - 
 constructor that should generate a new UUID, use the documentation to learn how to generate a random value.*/
+
+private UUID id;
+private String borrower; 
+private String lender;
+private BigDecimal amount;
+private Instant dateTime;
+
+}
