@@ -26,11 +26,17 @@ private String lender; // - name of lender
 private BigDecimal amount; // - amount covered by IOU
 private Instant dateTime; // - date and time of IOU being issued
 
+
 public IOU(String borrower, String lender, BigDecimal amount, Instant dateTime){
 this.borrower = borrower;
 this.lender = lender;
 this.amount = amount;
 this.dateTime = dateTime; 
+}
+
+
+public IOU() {
+    //TODO Auto-generated constructor stub
 }
 
 
