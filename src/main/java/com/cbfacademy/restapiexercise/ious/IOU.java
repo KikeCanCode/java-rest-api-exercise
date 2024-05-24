@@ -36,9 +36,8 @@ this.dateTime = dateTime;
 
 
 public IOU() {
-    //TODO Auto-generated constructor stub
+  this(null, null, BigDecimal.ZERO, Instant.now());
 }
-
 
 public UUID getId() {
   return id;

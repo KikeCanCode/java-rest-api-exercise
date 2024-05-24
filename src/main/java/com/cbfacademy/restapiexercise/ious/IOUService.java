@@ -12,9 +12,8 @@ public class IOUService {
 
 public IOURepository iouRepository; 
 
-public IOUService(IOURepository iouRepository) {
-
-    this.iouRepository = iouRepository;
+    public IOUService(IOURepository iouRepository) {
+        this.iouRepository = iouRepository;
 }
 
     /**
@@ -44,10 +43,9 @@ public IOUService(IOURepository iouRepository) {
      * @return The created IOU.
      */
     public IOU createIOU(IOU iou) throws IllegalArgumentException, OptimisticLockingFailureException {
-        return iouRepository.save(iou);  
+        return iouRepository.save(iou);  // A catch exception will be done in the controller. HttpStatus
     }
-        
-
+    
     /**
      * Update an existing IOU by its ID.
      *
@@ -55,11 +53,11 @@ public IOUService(IOURepository iouRepository) {
      * @param updatedIOU The updated IOU object.
      * @return The updated IOU, or null if the ID is not found.
      */
-   public IOU updateIOU(UUID id, IOU updatedIOU) throws NoSuchElementException { // id remind the same but replace the value with the new ones
+   public IOU updateIOU(UUID id, IOU updatedIOU) throws NoSuchElementException { // id reminds the same but replaced the value with the new ones
    
-    IOU iou = iouRepository.findById(id).orElseThrow();
-        iou.setBorrower(updatedIOU.getBorrower()); // 
-        iou.setLender(updatedIOU.getLender()); // save in a new variable the name of the lender of the updated iou object
+    IOU iou = iouRepository.findById(id).orElseThrow(); // A throw exception here, will be catch in controller - HttpStatus-not found
+        iou.setBorrower(updatedIOU.getBorrower()); 
+        iou.setLender(updatedIOU.getLender()); 
         iou.setAmount(updatedIOU.getAmount());
         iou.setDateTime(updatedIOU.getDateTime());
         iouRepository.save(iou); // saved updated iou
@@ -72,10 +70,8 @@ public IOUService(IOURepository iouRepository) {
      *
      * @param id The ID of the IOU to delete.
      */
-    public void deleteIOU(UUID id) { // 
-
+    public void deleteIOU(UUID id) { // If I added a throw exception here, it will be catch in the controller - so it's good
         iouRepository.deleteById(id);
         
     }
-
 }

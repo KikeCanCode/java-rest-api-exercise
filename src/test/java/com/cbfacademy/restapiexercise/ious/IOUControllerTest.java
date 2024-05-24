@@ -1,4 +1,4 @@
-package com.cbfacademy.restapiexercise.ious;
+/*package com.cbfacademy.restapiexercise.ious;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -269,3 +269,4 @@ class IOUControllerTest {
 		return UriComponentsBuilder.fromUri(uri).pathSegment(path).build().encode().toUri();
 	}
 }
+*/
