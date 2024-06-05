@@ -76,9 +76,7 @@ public class IOUController {
     // creating(Post) it.
     @PutMapping("/{id}")
 
-    public ResponseEntity<IOU> updatedIOU(@PathVariable UUID id, @RequestBody IOU updatedIOU) { // replacing the content
-                                                                                                // of the old IOU to new
-                                                                                                // one
+    public ResponseEntity<IOU> updatedIOU(@PathVariable UUID id, @RequestBody IOU updatedIOU) { // replacing the content  of the old IOU to new one                                                 // 
         try {
             IOU updatediou = iouService.updateIOU(id, updatedIOU);
             return ResponseEntity.status(HttpStatus.OK).body(updatediou);
@@ -95,13 +93,12 @@ public class IOUController {
             iouService.getIOU(id);
             iouService.deleteIOU(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (IllegalArgumentException exception) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (NoSuchElementException exception) {
+        } catch (IllegalArgumentException | NoSuchElementException exception) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
+//https://www.baeldung.com/exception-handling-for-rest-with-spring
 // https://www.tutorialspoint.com/postman/postman_put_requests.htm
 // https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/package-summary.html
 // https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/package-summary.htm

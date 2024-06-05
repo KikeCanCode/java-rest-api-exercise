@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity 
+@Entity //By using the @Entity annotation, you are indicating that a particular class is an entity and should be mapped to a database table.
 @Table (name= "ious") // This tells Hibernate to make a table out of this class
 
 public class IOU {
