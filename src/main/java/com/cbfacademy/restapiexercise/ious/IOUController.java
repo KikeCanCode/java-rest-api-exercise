@@ -30,12 +30,12 @@ PUT	/api/ious/{id}	Replace an IOU by Id
 DELETE	/api/ious/{id}	Delete an IOU by id
 Set the appropriate accessibility modifiers for all members and annotate the class as a RestController.*/
 
-@RestController
+@RestController          //It handles incoming HTTP requests and send response back to the caller.
 @RequestMapping(path = "/api/ious")
 
 public class IOUController {
 
-    @Autowired
+    @Autowired      //enables you to inject the object dependency implicitly. It internally uses setter or constructor injection.
     public IOUService iouService; // - in instance of the service interface
 
     public IOUController(IOUService iouService) { // - constructor that accepts an instance of the service interface
@@ -68,7 +68,7 @@ public class IOUController {
 
     public ResponseEntity<IOU> createIOU(@RequestBody IOU iou) {
         IOU createdIOU = iouService.createIOU(iou);
-        System.out.println(createdIOU.getId());
+       // System.out.println(createdIOU.getId());
         return ResponseEntity.status(HttpStatus.CREATED).body(createdIOU);
     }
 

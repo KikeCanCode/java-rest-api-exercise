@@ -35,7 +35,7 @@ this.dateTime = dateTime;
 }
 
 
-public IOU() {
+public IOU() { //default constructor that defines what when you don't a parameter.
   this(null, null, BigDecimal.ZERO, Instant.now());
 }
 
